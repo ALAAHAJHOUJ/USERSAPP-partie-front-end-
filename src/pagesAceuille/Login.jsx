@@ -94,6 +94,10 @@ function Login() {
              <input ref={ref2} type="password" placeholder='mot de passe' className='w-[267px] h-[42px] rounded-[10px] placeholder:text-center placeholder:text-[16px]' />
              {error.champs2?<span className="text-red-700 inline-block w-full mt-3 text-center">{error.champs2}</span>:<></>}
           </div>
+          <div className="w-full flex gap-[10px] items-center box-content pl-[40px]">
+             <input type="checkbox" name="souvenir" id="souvenir" className=" h-[16px] w-[16px] " />
+             <label htmlFor="souvenir" className=" text-white font-[600]">Se souvenir de moi</label>
+          </div>
 
           <div className='box-border mt-[40px] w-[80%]  flex flex-wrap justify-center gap-[20px]'>
             <input type="submit" value={"Se connecter"} className='rounded-[10px] text-white  w-[268px] h-[48px] bg-[rgba(255,255,255,0.41)] font-[Inika] font-[600] flex justify-center items-center cursor-pointer hover:bg-[#fafafaae]' onClick={handleLogin}/>

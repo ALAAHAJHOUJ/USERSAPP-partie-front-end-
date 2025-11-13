@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 
 
 
-function ModifierProfile({Onclick}) {
+function ModifierProfile({Onclick,Onclick2}) {
   const ref1=useRef();
   const ref2=useRef();
   const ref3=useRef();
@@ -11,7 +11,7 @@ function ModifierProfile({Onclick}) {
   const [error,setError]=useState({});
   const formatImage=useRef("");
 
-  const Modidifer=()=>{
+  const Modifier=()=>{
   let valide1=true;
   const regex1 = /^([a-zA-Z]){4,}$/;
   const regex2 = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -95,6 +95,37 @@ function ModifierProfile({Onclick}) {
 }
 
 
+
+
+  const modifierInos=async()=>{
+   
+    try {
+     const  a=await fetch("http://localhost:8000/ModifierProfile/",{credentials:"include",body:JSON.stringify({nom:ref1.current.value+"",prenom:ref2.current.value+"",email:ref3.current.value+"",password:ref4.current.value+""}),method:"POST",headers:{'Content-Type': 'application/json'}});
+     const resultat=await a.text();
+     if(resultat=="opération passée avec succes")
+     {
+     console.log("modification passée avec succes")
+     Onclick2();
+     }else 
+     {
+      console.log('une erreur est servenue1')
+     }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  const envoyer=()=>{
+    if(Modifier()==true)
+    {
+    console.log("envoi avec succes")
+    modifierInos();
+    }else{
+    console.log("echec de l'envoi")
+    }
+  }
+
   return (
     <div className='fixed top-0 left-0 bg-[#1f1f1f82]  flex justify-center flex-wrap content-start sup h-full w-full overflow-auto'>
         <div className='bg-white w-[90%] min-[500px]:w-[400px] box-border pt-[20px] min-h-[700px]  rounded-[15px] flex justify-center flex-wrap  gap-[30px] my-[30px]  '>
@@ -136,7 +167,7 @@ function ModifierProfile({Onclick}) {
                             </div>
 
                                <div className=' w-full  flex flex-wrap gap-[20px] justify-center  mb-[10px]'>
-                                    <div className=' w-[120px] h-[50px] bg-blue-400 rounded-[14px] text-white flex justify-center  items-center text-[15px] font-[700] italic hover:bg-blue-300 cursor-pointer' onClick={Modidifer}>Confirmer</div>
+                                    <div className=' w-[120px] h-[50px] bg-blue-400 rounded-[14px] text-white flex justify-center  items-center text-[15px] font-[700] italic hover:bg-blue-300 cursor-pointer' onClick={envoyer}>Confirmer</div>
                                     <div  className=' w-[120px] h-[50px] bg-red-500 rounded-[14px] text-white flex justify-center  items-center text-[15px] font-[700] italic hover:bg-red-300 cursor-pointer' onClick={()=>{Onclick()}}  >Annuler</div>
                                </div>
             </div>
