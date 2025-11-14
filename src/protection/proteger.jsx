@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useRef, useState } from 'react'
 import { useAuth } from '../App'
 import { useNavigate } from 'react-router-dom';
 import Cookies from "js-cookie";
@@ -14,8 +14,7 @@ function Proteger({children}) {
         const data = token ? jwtDecode(token) : null;
         const naviguer=useNavigate();
         const [loading,setLoading]=useState(true);
-
-
+        const [state,setState]=useState(1)
 
         const checkerLogin=async()=>{  //fonction qui verifie si l'utilisateur est connecté
 
@@ -33,6 +32,9 @@ function Proteger({children}) {
                 //sinon l'utilisateur est connecté et peut acceder a la ressourse protegée
         else       
                 {
+
+
+                        
                 setLoading(false);
                 //ici onva recuperer le token a partir des cookies pour recuperer la valeur du nom d'utilisateur
 
@@ -51,10 +53,12 @@ function Proteger({children}) {
 
         },[])
 
+       console.log(data)
+
 
        if(loading==true) return <div className='w-full  text-center text-[30px] text-white font-[600]'>Loading...</div>
 
-       return <context3.Provider value={{donnes:data}}>{children}</context3.Provider>
+       return <context3.Provider value={{donnes:data,rendu:()=>{setState(state+1)}}}>{children}</context3.Provider>
 }
 
 export default Proteger

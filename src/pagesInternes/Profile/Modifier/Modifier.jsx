@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react'
+import { motion } from 'framer-motion';
 
 
-
-function ModifierProfile({Onclick,Onclick2}) {
+function ModifierProfile({Onclick,Onclick2,Onclick3,Loading1,changerImage1}) {
   const ref1=useRef();
   const ref2=useRef();
   const ref3=useRef();
@@ -15,7 +15,7 @@ function ModifierProfile({Onclick,Onclick2}) {
   let valide1=true;
   const regex1 = /^([a-zA-Z]){4,}$/;
   const regex2 = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const regex3=/^[A-Za-z0-9]{6,12}$/;
+  const regex3=/^[A-Za-z0-9]{6,16}$/;
 
   if(ref1.current.value.trim()=='')  //verifier nom
     {setError((prev)=>{return {...prev,champs1:"Nom requis"}});valide1=false}
@@ -98,22 +98,51 @@ function ModifierProfile({Onclick,Onclick2}) {
 
 
   const modifierInos=async()=>{
-   
+    Loading1();
     try {
      const  a=await fetch("http://localhost:8000/ModifierProfile/",{credentials:"include",body:JSON.stringify({nom:ref1.current.value+"",prenom:ref2.current.value+"",email:ref3.current.value+"",password:ref4.current.value+""}),method:"POST",headers:{'Content-Type': 'application/json'}});
      const resultat=await a.text();
      if(resultat=="opération passée avec succes")
      {
-     console.log("modification passée avec succes")
-     Onclick2();
+     console.log("modification informations avec succes")
      }else 
      {
       console.log('une erreur est servenue1')
      }
+     const image=await envoyerImage();
     } catch (error) {
       console.log(error)
+      Onclick3()
     }
   }
+
+
+
+
+
+
+  const envoyerImage=async()=>{
+
+   changerImage1()
+   try {
+        const donnes=new FormData();
+        donnes.append("image",ref5.current.files[0]);
+
+        const resultat1=await fetch('http://localhost:8000/modifierImage/',{method:"POST",body:donnes,credentials:"include"})
+        console.log(resultat1)
+        const resultat=await resultat1.text()
+
+        console.log("Image envoyée avec succes")
+
+        Onclick2();
+        
+   } catch (error) {
+        console.log(error);
+        Onclick3()
+   }
+  }
+
+
 
 
   const envoyer=()=>{
@@ -128,7 +157,7 @@ function ModifierProfile({Onclick,Onclick2}) {
 
   return (
     <div className='fixed top-0 left-0 bg-[#1f1f1f82]  flex justify-center flex-wrap content-start sup h-full w-full overflow-auto'>
-        <div className='bg-white w-[90%] min-[500px]:w-[400px] box-border pt-[20px] min-h-[700px]  rounded-[15px] flex justify-center flex-wrap  gap-[30px] my-[30px]  '>
+        <motion.div initial={{opacity:0,y:-40}} animate={{opacity:1,y:0}} transition={{duration:1}} className='bg-white w-[90%] min-[500px]:w-[400px] box-border pt-[20px] min-h-[700px]  rounded-[15px] flex justify-center flex-wrap  gap-[30px] my-[30px]  '>
             <span className='italic font-[700] text-[20px]'>Modifier Profile</span>
             <div className=' w-[100%] flex flex-wrap gap-[20px] justify-center '>
                             <div className='w-[80%] flex flex-wrap justify-center gap-y-[5px]'>
@@ -151,7 +180,7 @@ function ModifierProfile({Onclick,Onclick2}) {
 
                             <div className='w-[80%] flex flex-wrap justify-center gap-y-[5px]'>
                                 <div className=' h-[30px] font-[Inika] text-[14px] font-[700] w-full text-center '>Saisir le mot de passe :</div>
-                                <input ref={ref4}  type="text" placeholder='Nom' className='w-[267px] h-[42px] border-[2px] border-black rounded-[10px] placeholder:text-center placeholder:text-[16px] box-border  ' />    
+                                <input ref={ref4}  type="password" placeholder='Nom' className='w-[267px] h-[42px] border-[2px] border-black rounded-[10px] placeholder:text-center placeholder:text-[16px] box-border  ' />    
                                  {error.champs4?<span className='text-red-700 w-full text-center'>{error.champs4}</span>:<></>}
                             </div>
 
@@ -171,7 +200,7 @@ function ModifierProfile({Onclick,Onclick2}) {
                                     <div  className=' w-[120px] h-[50px] bg-red-500 rounded-[14px] text-white flex justify-center  items-center text-[15px] font-[700] italic hover:bg-red-300 cursor-pointer' onClick={()=>{Onclick()}}  >Annuler</div>
                                </div>
             </div>
-        </div>
+        </motion.div>
     </div>
   )
 }
