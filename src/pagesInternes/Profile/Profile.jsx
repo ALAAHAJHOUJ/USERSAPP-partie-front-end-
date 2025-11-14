@@ -65,8 +65,8 @@ function Profile() {
     else 
     {
           console.log("suppression avec succes")
-          naviguer("/");  //on doit rediriger l'utilisateur vers la page de Login 
           setSucces(true)
+          naviguer("/");  //on doit rediriger l'utilisateur vers la page de Login 
     }
 
    } catch (error) {

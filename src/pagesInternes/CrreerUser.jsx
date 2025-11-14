@@ -82,6 +82,7 @@ function CrreerUser() {
     if(handleSignUp()==true)
     {
       console.log("envoi avec succes");
+      envoyerInfos()
     }
     else 
     {
@@ -89,6 +90,42 @@ function CrreerUser() {
     }
 
   }
+
+
+
+
+  const envoyerInfos=async()=>{
+   const data1=new FormData();
+
+   data1.append("nom",ref1.current.value)
+   data1.append("prenom",ref2.current.value)
+   data1.append("email",ref3.current.value)
+   data1.append("telephone",champsTel.current.value)
+   data1.append("image",champsImage.current.files[0])
+   try {
+    const resultat=await fetch("http://localhost:8000/AjouterUser",{credentials:"include",body:data1,method:"POST"})
+    
+    const resultat1=await resultat.text()
+
+    if(resultat1!="succes")
+    {
+      console.log("une erreur est servenue");
+      setError1(true)
+    }
+    else 
+    {
+      console.log("opération passée avec succes")
+      setSucces(true)
+    }
+
+    } catch (error) {
+      console.log(error);
+      setError1(true)
+    }
+  
+  }
+
+
 
 
   return (
