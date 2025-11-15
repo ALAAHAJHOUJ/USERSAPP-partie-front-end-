@@ -146,8 +146,8 @@ function Modalmodifier({confirme,annule}) {
 
 
             <div className='w-[80%] flex justify-center flex-wrap pt-[20px] gap-[20px]'>
-              <div className=' text-white text-[17px] bg-blue-500 rounded-[15px] w-[100px] flex justify-center items-center h-[50px] hover:bg-blue-300 cursor-pointer' onClick={envoyer}>Confirmer</div>
-              <div className=' text-white text-[17px] bg-red-500 rounded-[15px] w-[100px] flex justify-center items-center h-[50px] hover:bg-red-300 cursor-pointer' onClick={()=>{annule()}}>Anuuler</div>
+              <div className=' text-white text-[17px] bg-blue-500 rounded-[15px] w-[100px] flex justify-center items-center h-[50px] hover:bg-blue-300 font-[600] italic cursor-pointer' onClick={envoyer}>Confirmer</div>
+              <div className=' text-white text-[17px] bg-red-500 rounded-[15px] w-[100px] flex justify-center items-center h-[50px] hover:bg-red-300 font-[600] italic cursor-pointer' onClick={()=>{annule()}}>Anuuler</div>
             </div>
         </div>
 
