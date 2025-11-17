@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 
 
 
-function User({confirmer,Modifier,cle,Nom,Prenom,Email,tel,image}) {
-  const [errorImage,setError]=useState(false);
+function User({confirmer,Modifier,cle,Nom,Prenom,Email,tel,succes}) {
   const [src,setSrc]=useState("")
 
   const confirmer1= (idUser,nomUser)=>{
@@ -13,7 +12,9 @@ function User({confirmer,Modifier,cle,Nom,Prenom,Email,tel,image}) {
   }
 
 
-
+  const tester=()=>{
+    succes()
+  }
 
   const recupererImage=async()=>{
     try {
@@ -29,7 +30,6 @@ function User({confirmer,Modifier,cle,Nom,Prenom,Email,tel,image}) {
     
     } catch (error) {
       console.log(error);
-      setError(true)
     }
   }
 
@@ -54,7 +54,7 @@ function User({confirmer,Modifier,cle,Nom,Prenom,Email,tel,image}) {
       </div>
       <div className=' min-h-[55px] min-[900px]:h-[100px] w-[100%] min-[900px]:w-[calc(100%/7)] flex flex-wrap justify-center items-center gap-[10px]'>
             <div className='border-[2px] border-white text-white font-[500] bg-blue-400 rounded-[10px] flex justify-center items-center px-[15px] py-[5px] hover:bg-blue-300 cursor-pointer w-[120px]' onClick={()=>{Modifier(cle)}}>Modifier</div>
-            <div className='border-[2px] border-white text-white font-[500] bg-red-500 rounded-[10px] flex justify-center items-center px-[15px] py-[5px] hover:bg-red-300 cursor-pointer w-[120px]' onClick={()=>{confirmer1(cle,Nom)}}>Supprimer</div>
+            <div className='border-[2px] border-white text-white font-[500] bg-red-500 rounded-[10px] flex justify-center items-center px-[15px] py-[5px] hover:bg-red-300 cursor-pointer w-[120px]' onClick={()=>{confirmer(cle)}}>Supprimer</div>
       </div>
     </div>
   )

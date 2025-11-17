@@ -28,6 +28,16 @@ function Listeusers() {
   //recuperer le context
   const context2=useContext(context1)
 
+  const envoyer=()=>{
+
+      fetch("http://localhost:8000/getUsers/",{credentials:"include"})
+      .then((res)=>{return res.json()})
+      .then((res)=>{console.log(res); setData(res);setLoading(false);erreurRec.current="bien"})
+      .catch((err)=>{console.log("une erreur est servenue");setLoading(false);erreurRec.current="erreur"})
+  }
+
+
+
 
 
   //methodes
@@ -45,7 +55,7 @@ function Listeusers() {
               const modifierUser=(idUser)=>{
                  setModifier(true)
               }
-              return <User key={key} confirmer={(idUser)=>{idUser1.current=idUser;setconfirmer(true);}} Modifier={modifierUser} cle={ele.id_user} Nom={ele.nom} Prenom={ele.prenom} Email={ele.email} tel={ele.telephone} image={ele.image}></User>
+              return <User key={key} succes={()=>{setSucces(true)}} confirmer={(idUser)=>{idUser1.current=idUser;setconfirmer(true);}} Modifier={modifierUser} cle={ele.id_user} Nom={ele.nom} Prenom={ele.prenom} Email={ele.email} tel={ele.telephone}></User>
             })
 
             if(Liste.length)
@@ -55,25 +65,17 @@ function Listeusers() {
         }
   }
 
-  
 
 
 
-
-
-  const envoyer=()=>{
-
-      fetch("http://localhost:8000/getUsers/",{credentials:"include"})
-      .then((res)=>{return res.json()})
-      .then((res)=>{console.log(res); setData(res);setLoading(false);erreurRec.current="bien"})
-      .catch((err)=>{console.log("une erreur est servenue");setLoading(false);erreurRec.current="erreur"})
-  }
 
 
 
   useEffect(()=>{
   envoyer();
   },[])
+
+
 
 
 
@@ -113,7 +115,7 @@ function Listeusers() {
        {errorSupp==true?<Modal1 Onclick={()=>{setErrorsupp(false)}}></Modal1>:<></>}
        {Confirme==true?<Confirmer idUser={idUser1.current}   Onclick={()=>{setconfirmer(false)}} succes={()=>{setSucces(true);setErrorsupp(false)}} erreur={()=>{setErrorsupp(true);setSucces(false)}}></Confirmer>:<></>}
        {succes==true?<Succes Onclick={()=>{setSucces(false)}}></Succes>:<></>}
-       {modifier==true?<Modalmodifier  annule={()=>{setModifier(false);context2.cacherModal()}} ></Modalmodifier>:<></>}
+       {modifier==true?<Modalmodifier succes1={()=>{setSucces(true);setModifier(false);context2.cacherModal()}} erreur1={()=>{setErrorsupp(true);setModifier(false);context2.cacherModal()}} idUser1={idUser1.current}  annule={()=>{setModifier(false);context2.cacherModal()}} ></Modalmodifier>:<></>}
     </div>
   )
 }

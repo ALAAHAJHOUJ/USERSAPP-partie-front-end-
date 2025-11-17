@@ -9,13 +9,33 @@ function Confirmer({idUser,Onclick,succes,erreur}) {
     supprimer(idUser);
     }
 
-    const supprimer=()=>{
-      fetch("http://localhost:8000/supprimerUser/",{method:"POST",credentials: 'include',body:JSON.stringify({id:idUser}),headers: {'Content-Type': 'application/json'}})
-      .then((res)=>{return res.json()})
-      .then((res)=>{console.log(res);if(res.message=="une erreur s'est produite") {Onclick();erreur()} else {Onclick();succes()}})
-      .catch((err)=>{console.log(err);Onclick();erreur()})
+
+
+  const supprimer=async(idUser)=>{
+  try {
+    const resultat=await fetch(`http://localhost:8000/supprimerUser`,{method:"POST",body:JSON.stringify({id:idUser}),headers:{'Content-Type': 'application/json'},credentials:"include"});
+    
+    const resultat1=await resultat.json();
+
+    if(resultat1.message){
+          if( resultat1.message!="opération avec succes")
+          {
+          console.log("une erreur est servenue")
+          erreur()
+          }else{
+          console.log("opération passée avec succes")
+          succes()
+          }
     }
 
+
+  } catch (error) {
+    console.log(error)
+    erreur()
+  } finally{
+    Onclick()
+  }
+  }
 
   return (
     <div ref={ref1} className='w-full h-full fixed top-0 left-0 bg-[#1f1f1f82] flex justify-center items-center' onClick={(e)=>{if(e.target==ref1.current) Onclick()}}>
