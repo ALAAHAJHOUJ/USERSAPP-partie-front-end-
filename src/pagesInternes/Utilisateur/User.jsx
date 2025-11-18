@@ -11,11 +11,6 @@ function User({confirmer,Modifier,cle,Nom,Prenom,Email,tel,succes}) {
   confirmer(idUser);
   }
 
-
-  const tester=()=>{
-    succes()
-  }
-
   const recupererImage=async()=>{
     try {
     const resultat=await fetch(`http://localhost:8000/recupererImageUser/${cle}`,{credentials:"include"})
