@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import Motdepasse from "./Motdepasse";
 import Erreur1 from './Erreur1'
 import { useAuth } from "../App";
+import Code from "./Code";
 
 function Login() {
    const [error,setError]=useState(false);
    const [email,setEmail]=useState(false);
+   const [code,setCode]=useState(false)
    const ref1=useRef();
    const ref2=useRef();
    const naviguer=useNavigate();
@@ -78,6 +80,7 @@ function Login() {
 
   return (
     <div className='w-full  flex flex-col justify-start items-center gap-[90px]  '>
+       {code==true?<Code Onclick1={()=>{setCode(false)}}></Code>:<></>}
        {email==true?<Motdepasse Onclick1={()=>{setEmail(false)}} ></Motdepasse>:<></>}
        {error==true?<Erreur1 message={message} click={()=>{setError(false)}}></Erreur1>:<></>}
        <div className='w-[100px] h-[40px] text-[24px] text-[white] text-center font-[Inika] font-[700]' style={{textShadow:"2px 2px 5px rgba(255, 255, 255, 0.7)"}}>LOGIN</div>
