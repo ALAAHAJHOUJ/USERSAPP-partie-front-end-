@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { motion } from 'framer-motion';
-function Motdepasse({Onclick1}) {
+function Motdepasse({Onclick1,succes}) {
   const ref1=useRef();
   const ref2=useRef();
   const refEmail=useRef()
@@ -45,6 +45,8 @@ function Motdepasse({Onclick1}) {
             if(resultat1=="code envoyé avec succes,veuillez verifier")
             {
             console.log('opération passée avec succes')
+            succes()
+
             }else if(resultat1=="cet email n'existe pas")
             {
             console.log('email inexistant')
