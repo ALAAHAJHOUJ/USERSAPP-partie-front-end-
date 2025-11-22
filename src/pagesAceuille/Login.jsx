@@ -7,7 +7,7 @@ import Code from "./Code";
 import Actualiser from "./actualiser";
 
 function Login() {
-   const [actualiser1,setActualiser]=useState(true)
+   const [actualiser1,setActualiser]=useState(false)
    const [error,setError]=useState(false);
    const [email,setEmail]=useState(false);
    const [code,setCode]=useState(false)
@@ -82,8 +82,8 @@ function Login() {
 
   return (
     <div className='w-full  flex flex-col justify-start items-center gap-[90px]  '>
-       {actualiser1==true?<Actualiser></Actualiser>:<></>}
-       {code==true?<Code Onclick1={()=>{setCode(false)}}></Code>:<></>}
+       {actualiser1==true?<Actualiser nettoyer={()=>{setActualiser(false)}}></Actualiser>:<></>}
+       {code==true?<Code Onclick2={()=>{setCode(false);setError(true)}}  Onclick1={()=>{setCode(false)}} Onclick3={()=>{setCode(false);setActualiser(true)}}></Code>:<></>}
        {email==true?<Motdepasse Onclick1={()=>{setEmail(false)}} succes={()=>{setEmail(false);setCode(true)}} ></Motdepasse>:<></>}
        {error==true?<Erreur1 message={message} click={()=>{setError(false)}}></Erreur1>:<></>}
        <div className='w-[100px] h-[40px] text-[24px] text-[white] text-center font-[Inika] font-[700]' style={{textShadow:"2px 2px 5px rgba(255, 255, 255, 0.7)"}}>LOGIN</div>

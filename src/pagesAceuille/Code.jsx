@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-function Code({Onclick1}) {
+function Code({Onclick1,Onclick2,Onclick3}) {
   const ref1=useRef();
   const ref2=useRef()
   const [error,setError]=useState("bien")
+
 
 
   const valider=(e)=>{

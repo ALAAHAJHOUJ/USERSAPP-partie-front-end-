@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion'
 import React, { useRef, useState } from 'react'
 
-function Actualiser() {
+function Actualiser({nettoyer}) {
   const [error,setError]=useState("bien")
   const ref1=useRef();
   const ref2=useRef();
   const ref3=useRef();
 
 
-  const valider=()=>{//onva d'abord valider le mot de passe
+  const valider=()=>{//on va d'abord valider le mot de passe
 
   }
 
@@ -16,7 +16,7 @@ function Actualiser() {
 
   }
   return (
-    <div ref={ref1} className='w-full h-full bg-[#1f1f1f82] fixed top-0 left-0 flex justify-center items-center' onClick={(e)=>{/*if(e.target==ref1.current) {Onclick1()}*/}}>
+    <div ref={ref1} className='w-full h-full bg-[#1f1f1f82] fixed top-0 left-0 flex justify-center items-center' onClick={(e)=>{if(e.target==ref1.current) {nettoyer()}}}>
       <motion.div initial={{opacity:0,y:-100}} animate={{opacity:1,y:0}} transition={{duration:1}} className='bg-white rounded-[15px] w-[320px] min-h-[320px] flex justify-center flex-wrap content-center gap-[20px]'>
         <span className='text-[25px] font-[700] italic text-center'>Mot de passe oublié</span>
         <div className='w-full  flex justify-center flex-wrap gap-[15px]'>
@@ -24,7 +24,7 @@ function Actualiser() {
           <input ref={ref2} type="password" name="pass" id="pass" placeholder='Mot de passe' className='border-[#504a4a] border-[1px] w-[70%] h-[40px] rounded-[12px] placeholder:text-center' />
           <div className='text-red-500 font-[600] w-full text-center'>{error!="bien"?error:""}</div>
           <input type="submit"  value={"Envoi"} className='bg-blue-500 focus:border-none focus:outline-none rounded-[12px] text-white w-[120px] h-[40px] text-center mt-[40px] cursor-pointer font-[700] italic hover:bg-blue-300'/>
-          <div ref={ref3} className='bg-red-500 font-[700] focus:border-none focus:outline-none text-white rounded-[12px] w-[120px] h-[40px] flex justify-center items-center mt-[40px] italic cursor-pointer hover:bg-red-300'>Annuler</div>
+          <div ref={ref3} onClick={()=>{nettoyer()}} className='bg-red-500 font-[700] focus:border-none focus:outline-none text-white rounded-[12px] w-[120px] h-[40px] flex justify-center items-center mt-[40px] italic cursor-pointer hover:bg-red-300'>Annuler</div>
         </div>
          
       </motion.div>
