@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-function Code({Onclick1,Onclick2,Onclick3}) {
+function Code({Onclick1,Onclick2,Onclick3,email1}) {
   const ref1=useRef();
   const ref2=useRef()
   const [error,setError]=useState("bien")
@@ -8,10 +8,45 @@ function Code({Onclick1,Onclick2,Onclick3}) {
 
 
   const valider=(e)=>{
-  
+      e.preventDefault()
+      const longueur=ref2.current.value.length;
+      if(longueur!=5){
+      setError("la longueur doit etre 5")
+      }else 
+      {
+      setError('bien')
+      envoyer()
+      }
   }
 
-  const envoyer=()=>{
+
+
+  const envoyer=async()=>{
+    try {
+        const resultat=await fetch(`http://localhost:8000/verifiercode`,{method:"POST",headers:{'Content-Type': 'application/json'},body:JSON.stringify({email:email1,code:ref2.current.value})});
+
+        const resultat1=await resultat.text()
+      
+        if(resultat1=="code valide et n 'est pas encore expiré"){
+           console.log("code valide")
+           Onclick3()
+
+        }
+        else if(resultat1=="le code est expirée" || resultat1=="code invalide")
+
+        {
+           console.log("code invalide ou expiré")
+           Onclick2()
+        }    
+        else {
+            console.log("ressayer")
+            Onclick2()
+        }
+    } catch (error) {
+        console.log(error)
+        console.log("une erreur est servenue")
+        Onclick2()
+    }
     
   }
 

@@ -16,6 +16,7 @@ function Login() {
    const naviguer=useNavigate();
    const {message,setMessage}=useState("");
    const auth=useAuth();
+   const [emailEnvoie,setEmailEnvoi]=useState("")
 
 
    console.log(auth);
@@ -83,8 +84,8 @@ function Login() {
   return (
     <div className='w-full  flex flex-col justify-start items-center gap-[90px]  '>
        {actualiser1==true?<Actualiser nettoyer={()=>{setActualiser(false)}}></Actualiser>:<></>}
-       {code==true?<Code Onclick2={()=>{setCode(false);setError(true)}}  Onclick1={()=>{setCode(false)}} Onclick3={()=>{setCode(false);setActualiser(true)}}></Code>:<></>}
-       {email==true?<Motdepasse Onclick1={()=>{setEmail(false)}} succes={()=>{setEmail(false);setCode(true)}} ></Motdepasse>:<></>}
+       {code==true?<Code email1={emailEnvoie} Onclick2={()=>{setCode(false);setError(true)}}  Onclick1={()=>{setCode(false)}} Onclick3={()=>{setCode(false);setActualiser(true)}}></Code>:<></>}
+       {email==true?<Motdepasse donnerEmail={(email)=>{setEmailEnvoi(email)}} Onclick1={()=>{setEmail(false)}} erreur={()=>{setError(true);setEmail(false)}} succes={()=>{setEmail(false);setCode(true)}} ></Motdepasse>:<></>}
        {error==true?<Erreur1 message={message} click={()=>{setError(false)}}></Erreur1>:<></>}
        <div className='w-[100px] h-[40px] text-[24px] text-[white] text-center font-[Inika] font-[700]' style={{textShadow:"2px 2px 5px rgba(255, 255, 255, 0.7)"}}>LOGIN</div>
 
