@@ -29,7 +29,7 @@ function Code({Onclick1,Onclick2,Onclick3,email1}) {
       
         if(resultat1=="code valide et n 'est pas encore expiré"){
            console.log("code valide")
-           Onclick3()
+           Onclick3(ref2.current.value)
 
         }
         else if(resultat1=="le code est expirée" || resultat1=="code invalide")

@@ -5,6 +5,12 @@ import Erreur1 from './Erreur1'
 import { useAuth } from "../App";
 import Code from "./Code";
 import Actualiser from "./actualiser";
+import Succes1 from "./ModalSucces/sucees1";
+
+
+
+
+
 
 function Login() {
    const [actualiser1,setActualiser]=useState(false)
@@ -17,6 +23,8 @@ function Login() {
    const {message,setMessage}=useState("");
    const auth=useAuth();
    const [emailEnvoie,setEmailEnvoi]=useState("")
+   const [succes,setSucces]=useState(false)
+   const [Code1,setCode1]=useState("")
 
 
    console.log(auth);
@@ -83,8 +91,9 @@ function Login() {
 
   return (
     <div className='w-full  flex flex-col justify-start items-center gap-[90px]  '>
-       {actualiser1==true?<Actualiser nettoyer={()=>{setActualiser(false)}}></Actualiser>:<></>}
-       {code==true?<Code email1={emailEnvoie} Onclick2={()=>{setCode(false);setError(true)}}  Onclick1={()=>{setCode(false)}} Onclick3={()=>{setCode(false);setActualiser(true)}}></Code>:<></>}
+       {succes==true?<Succes1  Onclick={()=>{setSucces(false)}}></Succes1>:<></>}
+       {actualiser1==true?<Actualiser email1={emailEnvoie} code1={Code1} succes={()=>{setSucces(true);setActualiser(false)}} error1={()=>{setActualiser(false);setError(true)}}  nettoyer={()=>{setActualiser(false)}}></Actualiser>:<></>}
+       {code==true?<Code email1={emailEnvoie} Onclick2={()=>{setCode(false);setError(true)}}  Onclick1={()=>{setCode(false)}} Onclick3={(code2)=>{setCode(false);setActualiser(true);setCode1(code2)}}></Code>:<></>}
        {email==true?<Motdepasse donnerEmail={(email)=>{setEmailEnvoi(email)}} Onclick1={()=>{setEmail(false)}} erreur={()=>{setError(true);setEmail(false)}} succes={()=>{setEmail(false);setCode(true)}} ></Motdepasse>:<></>}
        {error==true?<Erreur1 message={message} click={()=>{setError(false)}}></Erreur1>:<></>}
        <div className='w-[100px] h-[40px] text-[24px] text-[white] text-center font-[Inika] font-[700]' style={{textShadow:"2px 2px 5px rgba(255, 255, 255, 0.7)"}}>LOGIN</div>
