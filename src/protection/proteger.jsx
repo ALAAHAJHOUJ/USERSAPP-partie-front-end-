@@ -24,10 +24,13 @@ function Proteger({children}) {
 
         const login1=await resultat.json();
 
-        console.log(data)
-        console.log(login1);
         if(login1.message=="non authentifié" || login1.message=="probleme dans le token")  //l'utilisateur n'est pas authentifié
-                {naviguer("/");   setLoading(false); }
+                {
+                
+                naviguer("/",{replace:true});   
+                setLoading(false); 
+        
+                }
 
                 //sinon l'utilisateur est connecté et peut acceder a la ressourse protegée
         else       
@@ -47,17 +50,17 @@ function Proteger({children}) {
 
 
         useEffect(()=>{
-
+        
         checkerLogin();
 
 
         },[])
 
-       console.log(data)
 
 
        if(loading==true) return <div className='w-full  text-center text-[30px] text-white font-[600]'>Loading...</div>
-
+ 
+       if(data==null) return <></>
        return <context3.Provider value={{donnes:data,rendu:()=>{setState(state+1)}}}>{children}</context3.Provider>
 }
 
