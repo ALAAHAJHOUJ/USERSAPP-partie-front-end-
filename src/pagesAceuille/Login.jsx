@@ -13,48 +13,68 @@ import Succes1 from "./ModalSucces/sucees1";
 
 
 function Login() {
-   const [actualiser1,setActualiser]=useState(false)
-   const [error,setError]=useState(false);
-   const [email,setEmail]=useState(false);
-   const [code,setCode]=useState(false)
-   const ref1=useRef();
-   const ref2=useRef();
-   const naviguer=useNavigate();
-   const {message,setMessage}=useState("");
-   const auth=useAuth();
-   const [emailEnvoie,setEmailEnvoi]=useState("")
-   const [succes,setSucces]=useState(false)
-   const [Code1,setCode1]=useState("")
+          const [actualiser1,setActualiser]=useState(false)
+          const [error,setError]=useState(false);
+          const [email,setEmail]=useState(false);
+          const [code,setCode]=useState(false)
+          const ref1=useRef();
+          const ref2=useRef();
+          const naviguer=useNavigate();
+          const {message,setMessage}=useState("");
+          const auth=useAuth();
+          const [emailEnvoie,setEmailEnvoi]=useState("")
+          const [succes,setSucces]=useState(false)
+          const [Code1,setCode1]=useState("")
+          const refCheck=useRef();
+
+          console.log(auth);
+
+          const Envoyer=()=>{  //envoyer une demande de connexion
+          fetch("http://localhost:8000/Login/",{method:"POST",credentials: 'include',body:JSON.stringify({nom:ref1.current.value+"",password:ref2.current.value+""}),headers: {'Content-Type': 'application/json'}})
+          .then((res)=>{return res.text()})
+          .then((res)=>{console.log(res);if(res=="utilisateur n'existe pas" || res=="une erreur est servenue")/*une erreur dans le login*/  
+          {
+
+            console.log("erreur de login ");setError(true);
+          
+          }
+          else /*opération passée avec succes*/ 
+          {
+          if(refCheck.current.checked==true){
+
+              localStorage.setItem("nom",ref1.current.value);
+              localStorage.setItem("password",ref2.current.value);
+
+          }else {
+
+              localStorage.setItem("nom","");
+              localStorage.setItem("password","");
+
+          }
+          setError(false);naviguer("/profile")}})
+
+          .catch((err)=>{console.log(err);setError(true)})
+          }
 
 
-   console.log(auth);
-
-   const Envoyer=()=>{  //envoyer une demande de connexion
-   fetch("http://localhost:8000/Login/",{method:"POST",credentials: 'include',body:JSON.stringify({nom:ref1.current.value+"",password:ref2.current.value+""}),headers: {'Content-Type': 'application/json'}})
-   .then((res)=>{return res.text()})
-   .then((res)=>{console.log(res);if(res=="utilisateur n'existe pas" || res=="une erreur est servenue")/*une erreur dans le login*/  {console.log("erreur de login ");setError(true);}else /*opération passée avec succes*/  {setError(false);naviguer("/profile")}})
-   .catch((err)=>{console.log(err);setError(true)})
-   }
 
 
+        const handleLogin=(e)=>{
+            e.preventDefault();
+            let envoi=true;
+            if(ref1.current.value.trim()=='')
+              { setError((prev)=>{return {...prev,champs1:"Nom requis"}});envoi=false}
+            else 
+              {setError((prev)=>{return {...prev,champs1:undefined}})}
 
+            if(ref2.current.value.trim()=='')
+              { setError((prev)=>{return  {...prev,champs2:"mot de passe requis"}});envoi=false}
+            else 
+              { setError((prev)=>{return {...prev,champs2:undefined}})}
+            if(envoi==true)
+              Envoyer();
 
-   const handleLogin=(e)=>{
-      e.preventDefault();
-      let envoi=true;
-      if(ref1.current.value.trim()=='')
-        { setError((prev)=>{return {...prev,champs1:"Nom requis"}});envoi=false}
-      else 
-        {setError((prev)=>{return {...prev,champs1:undefined}})}
-
-      if(ref2.current.value.trim()=='')
-        { setError((prev)=>{return  {...prev,champs2:"mot de passe requis"}});envoi=false}
-      else 
-        { setError((prev)=>{return {...prev,champs2:undefined}})}
-      if(envoi==true)
-         Envoyer();
-
-   }
+        }
 
 
 
@@ -79,13 +99,17 @@ function Login() {
 
 
 
-  //effets secondaires
+        //effets secondaires
 
-  useEffect(()=>{
+        useEffect(()=>{
 
-  checkerLogin();
-
-  },[])
+            checkerLogin();
+            if(localStorage.getItem("nom")&&localStorage.getItem("password"))
+            {
+                ref1.current.value=localStorage.getItem("nom")
+                ref2.current.value=localStorage.getItem("password")
+            }
+        },[])
 
 
 
@@ -111,7 +135,7 @@ function Login() {
              {error.champs2?<span className="text-red-700 inline-block w-full mt-3 text-center">{error.champs2}</span>:<></>}
           </div>
           <div className="w-full flex gap-[10px] items-center box-content pl-[40px]">
-             <input type="checkbox" name="souvenir" id="souvenir" className=" h-[16px] w-[16px] " />
+             <input ref={refCheck}  type="checkbox" name="souvenir" id="souvenir" className=" h-[16px] w-[16px] " />
              <label htmlFor="souvenir" className=" text-white font-[600]">Se souvenir de moi</label>
           </div>
 
