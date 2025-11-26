@@ -104,7 +104,7 @@ function Login() {
         useEffect(()=>{
 
             checkerLogin();
-            if(localStorage.getItem("nom")&&localStorage.getItem("password"))
+            if(localStorage.getItem("nom")&&localStorage.getItem("password")&&localStorage.get("nom")!==""&&localStorage.get("password")!=="")
             {
                 ref1.current.value=localStorage.getItem("nom")
                 ref2.current.value=localStorage.getItem("password")
