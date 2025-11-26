@@ -114,7 +114,7 @@ function Listeusers() {
        </div>
        {errorSupp==true?<Modal1 Onclick={()=>{setErrorsupp(false)}}></Modal1>:<></>}
        {Confirme==true?<Confirmer idUser={idUser1.current}   Onclick={()=>{setconfirmer(false)}} succes={()=>{setSucces(true);setErrorsupp(false)}} erreur={()=>{setErrorsupp(true);setSucces(false)}}></Confirmer>:<></>}
-       {succes==true?<Succes Onclick={()=>{setSucces(false)}}></Succes>:<></>}
+       {succes==true?<Succes Onclick={()=>{setSucces(false);window.location.reload();}}></Succes>:<></>}
        {modifier==true?<Modalmodifier succes1={()=>{setSucces(true);setModifier(false);context2.cacherModal()}} erreur1={()=>{setErrorsupp(true);setModifier(false);context2.cacherModal()}} idUser1={idUser1.current}  annule={()=>{setModifier(false);context2.cacherModal()}} ></Modalmodifier>:<></>}
     </div>
   )

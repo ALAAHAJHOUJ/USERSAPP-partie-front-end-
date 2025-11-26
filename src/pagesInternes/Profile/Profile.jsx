@@ -96,8 +96,8 @@ function Profile() {
     {confirme==true?<Confirmer confirme1={()=>{supprimerProfile()}} Onclick={()=>{setConfirme(false)}}></Confirmer>:<></>}
     {Loading1==true?<Loading ></Loading>:<></>}
     {error==true?<ErrorProfile Onclick={()=>{setErrorsupp(false)}}></ErrorProfile>:<></>}
-    {succes==true?<SuccesProfile Onclick={()=>{setSucces(false)}}></SuccesProfile>:<></>}
-    {modifier==true?<ModifierProfile changerImage1={()=>{setChanger(true)}} Loading1={()=>{setLoading(true)}} Onclick3={()=>{setErrorsupp(true);setLoading(false);setModifier(false);context2.cacherModal()}} Onclick2={()=>{setSucces(true);setLoading(false);setModifier(false);context2.cacherModal();contextDoones.rendu()}}   Onclick={()=>{setModifier(false);context2.cacherModal()}}></ModifierProfile>:<></>}
+    {succes==true?<SuccesProfile Onclick={()=>{window.location.reload();}}></SuccesProfile>:<></>}
+    {modifier==true?<ModifierProfile changerImage1={()=>{setChanger(true)}} Loading1={()=>{setLoading(true)}} Onclick3={()=>{setErrorsupp(true);setLoading(false);setModifier(false);context2.cacherModal()}} Onclick2={()=>{setSucces(true);setLoading(false);setModifier(false);context2.cacherModal();}}   Onclick={()=>{setModifier(false);context2.cacherModal()}}></ModifierProfile>:<></>}
     <div className=' w-full min-h-[100vh]  flex content-start justify-center flex-wrap gap-[50px] pt-12  '>
        <div className=' w-[90%] flex justify-center items-center mb-[100px]'>
          {src==""?

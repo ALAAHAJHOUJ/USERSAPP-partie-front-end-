@@ -20,8 +20,7 @@ const router=createBrowserRouter([
     
    {
     path:"/",   //page de connexion
-    element:<Login></Login>,
-    errorElement:<Notfound></Notfound> //route n'existe pas 
+    element:<Login></Login>
    },
   {
     path:"/inscription",   //page d'inscription
@@ -39,6 +38,10 @@ const router=createBrowserRouter([
     path:"/ajouterUtilisateur",  // page d'ajout d'un utilisateur --protégée
     element:<Proteger><CrreerUser></CrreerUser></Proteger>
    },
+   {
+    path:"*",
+    element:<Notfound></Notfound> //route n'existe pas 
+   }
 ])
 
 
