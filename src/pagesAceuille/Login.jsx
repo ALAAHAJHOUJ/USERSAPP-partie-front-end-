@@ -30,7 +30,7 @@ function Login() {
           console.log(auth);
 
           const Envoyer=()=>{  //envoyer une demande de connexion
-          fetch("http://localhost:8000/Login/",{method:"POST",credentials: 'include',body:JSON.stringify({nom:ref1.current.value+"",password:ref2.current.value+""}),headers: {'Content-Type': 'application/json'}})
+          fetch("https://backendusersapp.vercel.app/Login/",{method:"POST",credentials: 'include',body:JSON.stringify({nom:ref1.current.value+"",password:ref2.current.value+""}),headers: {'Content-Type': 'application/json'}})
           .then((res)=>{return res.text()})
           .then((res)=>{console.log(res);if(res=="utilisateur n'existe pas" || res=="une erreur est servenue")/*une erreur dans le login*/  
           {
@@ -82,7 +82,7 @@ function Login() {
         const checkerLogin=async()=> {  //fonction qui verifie si l'utilisateur est connecté
 
         try {
-        const resultat=await fetch('http://localhost:8000/',{credentials: 'include'});
+        const resultat=await fetch('https://backendusersapp.vercel.app/',{credentials: 'include'});
 
         const login1=await resultat.json();
 

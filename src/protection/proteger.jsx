@@ -18,7 +18,7 @@ function Proteger({children}) {
 
         const checkerLogin=async()=>{  //fonction qui verifie si l'utilisateur est connecté
 
-        const resultat=await fetch('http://localhost:8000/',{credentials:"include"});
+        const resultat=await fetch('https://backendusersapp.vercel.app/',{credentials:"include"});
 
 
 

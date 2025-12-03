@@ -110,7 +110,7 @@ function Inscription() {
   console.log(refImag.current)
 
 
-  fetch('http://localhost:8000/inscription/',{method:"POST",body:formdata})
+  fetch('https://backendusersapp.vercel.app/inscription',{method:"POST",body:formdata})
   .then((res)=>{console.log(res);return res.text();})
   .then((res)=>{console.log(res);
 
@@ -124,6 +124,8 @@ function Inscription() {
      
   .catch((err)=>{console.log(err);setEchec(true);setLoading(false)})
   }
+
+
 
 
 

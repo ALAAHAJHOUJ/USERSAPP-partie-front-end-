@@ -177,7 +177,7 @@ function CrreerUser() {
 
           <div className='box-border mt-[40px] w-[80%]  flex flex-wrap justify-center gap-[20px]'>
             <div className='rounded-[10px] text-white  w-[268px] h-[48px] bg-[rgba(255,255,255,0.41)] font-[Inika] font-[600] flex justify-center items-center cursor-pointer hover:bg-[#fafafaae]' onClick={envoyer}>ajouter</div>
-            <div className='rounded-[10px] text-white  w-[268px] h-[48px] bg-[rgba(255,255,255,0.41)] font-[Inika] font-[600] flex justify-center items-center cursor-pointer hover:bg-[#fafafaae]' onClick={()=>{naviguer('/Listeusers')}}>ListeUsers</div>
+            <div className='rounded-[10px] text-white  w-[268px] h-[48px] bg-[rgba(255,255,255,0.41)] font-[Inika] font-[600] flex justify-center items-center cursor-pointer hover:bg-[#fafafaae]' onClick={()=>{naviguer('/Listeusers')}}>Liste Utilisateurs</div>
           </div>
         </div>
         {Error1?<ModalError Onclick={()=>{setError1(false)}}></ModalError>:<></>}

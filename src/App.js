@@ -63,8 +63,10 @@ function App() {
   }
   console.log('render')
 
+
   return (
     <context1.Provider value={{cacherModal,afficherModal}}>
+
       <div className={cacher==true?"pt-[60px]  w-full min-h-[100vh] overflow-visible bg-[linear-gradient(180deg,_#5E6EDA_12.02%,_#323B74_100%)] box-border":"pt-[60px]  w-full h-[100vh] overflow-hidden bg-[linear-gradient(180deg,_#5E6EDA_12.02%,_#323B74_100%)] box-border"}>
             <RouterProvider router={router}></RouterProvider>
       </div>
