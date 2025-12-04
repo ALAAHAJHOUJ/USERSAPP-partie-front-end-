@@ -28,7 +28,6 @@ function Proteger({children}) {
                 {
                 
                 naviguer("/",{replace:true});   
-                setLoading(false); 
         
                 }
 

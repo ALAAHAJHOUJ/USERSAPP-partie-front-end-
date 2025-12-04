@@ -35,7 +35,8 @@ function Login() {
           .then((res)=>{console.log(res);if(res=="utilisateur n'existe pas" || res=="une erreur est servenue")/*une erreur dans le login*/  
           {
 
-            console.log("erreur de login ");setError(true);
+            console.log("erreur de login ");
+            setError(true);
           
           }
           else /*opération passée avec succes*/ 
